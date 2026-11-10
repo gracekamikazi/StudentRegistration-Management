@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Students</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container wide">
+    <h1>Registered Students</h1>
+
+    <div class="alert error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+    <div class="table-wrap" th:if="${students != null and !students.isEmpty()}">
+        <table>
+            <thead>
+            <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Age</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="s : ${students}">
+                <td th:text="${s.id}"></td>
+                <td th:text="${s.firstName}"></td>
+                <td th:text="${s.lastName}"></td>
+                <td th:text="${s.email}"></td>
+                <td th:text="${s.age}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="alert info" th:if="${errorMessage == null and (students == null or students.isEmpty())}">
+        No students are registered yet.
+    </p>
+
+    <p class="nav">
+        <a th:href="@{/student/register}">&larr; Register a student</a> |
+        <a th:href="@{/student/all}">All students</a>
+    </p>
+</div>
+</body>
+</html>
